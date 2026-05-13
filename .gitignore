@@ -36,4 +36,5 @@ Firefly-docs/
 
 cache/
 package/
-.obsidian/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
