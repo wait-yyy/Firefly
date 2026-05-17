@@ -8,15 +8,28 @@ draft: true
 
 # 这篇文章是草稿
 
-这篇文章目前处于草稿状态，尚未发布。因此，它不会对普通读者可见。内容仍在进行中，可能需要进一步编辑和审查。
+[牛客周赛144 - D](https://ac.nowcoder.com/acm/contest/134957/D)
 
-当文章准备发布时，您可以在 Frontmatter 中将 "draft" 字段更新为 "false"：
+### 考点： 位运算 ， 同等取余转组合数
+## 题面	
+$\hspace{15pt}$给定一个区间 $[l,r]$和一个整数 *k*，其中 *k* 是 *2* 的非负整数次幂。  
+$\hspace{15pt}$请计算有多少个二元组 $i,j(l\leq i<j\leq r)$，满足 $i\operatorname{xor} j$ 是 $k$ 的倍数。
 
-```markdown
----
-title: 草稿示例
-published: 2024-01-11T04:40:26.381Z
-tags: [Markdown, 博客, 演示]
-category: 示例
-draft: false
----
+## 思考
+$\hspace{15pt}$要使 $i\operatorname{xor} j$ 是 $k$ 的倍数，且发现$k$ 是 *2*  的非负整数次幂。则 k 的二进制一定是由 一个1和$m-1$个0组成。所以对于所有 $i，j$ 当 $i\operatorname{xor}j$ 的二进制后缀有$m-1$ 个0的时候则成立。
+$\hspace{15pt}$当$i,j$ 的后 $m-1$ 个二进制数相同时成立一个二元组，在所有数 $[L,R]$ 里共有*R-L+1* 个数字，对于每种后缀最少有 $(R-L+1) / k$ 种可能。这一部分共有 $$(R-L+1)\times(R-l)÷2\times k$$合法二元组。对于剩下的 *(R-L+1)%k* 则有$$(R-L+1)\bmod k \times(R-L+1) \div k$$然后将这两个公式求和即可
+
+## 代码
+```cpp
+signed main(){
+    int l,r,k;
+    cin>>l>>r>>k;
+    int n=r-l+1;
+    int q=n/k;
+    long long ans=q*k*(q-1)/2+n%k*q;
+    cout<<ans<<endl;
+}
+```
+
+## 思维亮点
+$\hspace{15pt}$用2的次幂的倍数来将一个区间的数字按 _余_ 来分类然后通过组合数）计算来得到答案
